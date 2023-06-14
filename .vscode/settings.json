@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/6d9bd797-2afd-4901-b3ca-4b14833089e0/resourceGroups/skyplucker-odata_group/providers/Microsoft.Web/sites/skyplkr-odata",
+    "appService.deploySubpath": "."
+}
