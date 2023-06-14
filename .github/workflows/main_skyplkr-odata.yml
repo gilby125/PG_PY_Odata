@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'skyplkr-odata'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3395989DB1814051B26C0B3FA9F19866 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_738A70E60E1449F4AD83F715682BD88E }}
