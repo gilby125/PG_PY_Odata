@@ -61,4 +61,4 @@ class FlightDataResource(Resource):
 api.add_resource(FlightDataResource, "/odata/flight_data", "/odata/flight_data/<int:flight_id>")
 
 if __name__ == "__main__":
-    app.run(port=8000, debug=True)
+    app.run( debug=True)
