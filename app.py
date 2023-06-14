@@ -2,7 +2,6 @@ from flask import Flask, request
 from flask_restful import Resource, Api
 from flask_sqlalchemy import SQLAlchemy
 import datetime
-import argparse
 import psycopg2
 import os
 
