@@ -17,6 +17,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = args.db_connection
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
+
 class FlightData(db.Model):
     __tablename__ = args.table_name
     id = db.Column(db.Integer, primary_key=True)
@@ -33,9 +34,11 @@ class FlightData(db.Model):
             result[c.name] = value
         return result
 
+
 for table in args.table_name.split(','):
     class_name = table.title().replace('_', '') + 'Data'
     locals()[class_name] = type(class_name, (db.Model,), {'__tablename__': table})
+
 
 class FlightDataResource(Resource):
     def get(self, flight_id=None):
@@ -59,4 +62,4 @@ class FlightDataResource(Resource):
 api.add_resource(FlightDataResource, "/odata/flight_data", "/odata/flight_data/<int:flight_id>")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(port=8000, debug=True)
