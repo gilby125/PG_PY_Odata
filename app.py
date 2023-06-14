@@ -4,22 +4,23 @@ from flask_sqlalchemy import SQLAlchemy
 import datetime
 import argparse
 import psycopg2
+import os
+
 
 app = Flask(__name__)
 api = Api(app)
 
-parser = argparse.ArgumentParser(description='Process database connection and table name.')
-parser.add_argument('--db_connection', type=str, help='Database connection string')
-parser.add_argument('--table_name', type=str, help='Table name')
-args = parser.parse_args()
+db_connection = os.environ.get('DB_CONNECTION')
+table_name = os.environ.get('TABLE_NAME')
 
-app.config["SQLALCHEMY_DATABASE_URI"] = args.db_connection
+app.config["SQLALCHEMY_DATABASE_URI"] = db_connection
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
 db = SQLAlchemy(app)
 
 
 class FlightData(db.Model):
-    __tablename__ = args.table_name
+    __tablename__ = table_name  # Use the retrieved table_name
     id = db.Column(db.Integer, primary_key=True)
     flight_id = db.Column(db.String, unique=True, nullable=False)
     flyFrom = db.Column(db.String)
@@ -35,9 +36,7 @@ class FlightData(db.Model):
         return result
 
 
-for table in args.table_name.split(','):
-    class_name = table.title().replace('_', '') + 'Data'
-    locals()[class_name] = type(class_name, (db.Model,), {'__tablename__': table})
+
 
 
 class FlightDataResource(Resource):
